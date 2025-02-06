@@ -9,6 +9,6 @@ def pan_gram(a):
         if len(b)==26:
             return 'pangram'
         else:
-            return 'not pan'
+            return 'not pangram'
 Sent=input()
 print(pan_gram(Sent))
