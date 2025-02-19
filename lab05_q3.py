@@ -18,7 +18,8 @@ def biggerIsGreater(w):
     
     return "".join(arr)
 
-T = int(input().strip())
+T,list1= int(input().strip()),[]
 for i in range(T):
-     w = input().strip()
-     print(biggerIsGreater(w))
+     list1.append(input().strip())
+for el in list1:    
+     print(biggerIsGreater(el))
