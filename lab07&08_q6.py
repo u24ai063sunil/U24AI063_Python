@@ -1,40 +1,69 @@
-class BankAccount:
-    def __init__(self, account_number, balance=0.0):
-        self.account_number = account_number
-        self.balance = balance
+"""
+Write a Python program to create a class representing a bank. Include methods for managing
+customer accounts and transactions.
+"""
 
-    def deposit(self, amount):
-        if amount > 0:
-            self.balance += amount
-            print(f"Deposited ${amount:.2f}. New balance: ${self.balance:.2f}")
+class Bank:
+    def __init__(self):
+        self.accounts = {}
+
+    def create_account(self, acc_no, name, balance=0):
+        if acc_no in self.accounts:
+            print("Account already exists!")
         else:
-            print("Deposit amount must be positive.")
+            self.accounts[acc_no] = {'name': name, 'balance': balance}
+            print("Account created successfully.")
 
-    def withdraw(self, amount):
-        if amount > 0:
-            if self.balance >= amount:
-                self.balance -= amount
-                print(f"Withdrawn ${amount:.2f}. New balance: ${self.balance:.2f}")
-            else:
-                print("Insufficient funds.")
+    def deposit(self, acc_no, amount):
+        if acc_no in self.accounts:
+            self.accounts[acc_no]['balance'] += amount
+            print(f"Deposited {amount}. New balance: {self.accounts[acc_no]['balance']}")
         else:
-            print("Withdrawal amount must be positive.")
+            print("Account not found!")
 
-    def display_account(self):
-        print(f"Account Number: {self.account_number}")
-        print(f"Balance: ${self.balance:.2f}")
+    def withdraw(self, acc_no, amount):
+        if acc_no in self.accounts and self.accounts[acc_no]['balance'] >= amount:
+            self.accounts[acc_no]['balance'] -= amount
+            print(f"Withdrew {amount}. New balance: {self.accounts[acc_no]['balance']}")
+        else:
+            print("Insufficient funds or account not found!")
 
+    def display_account(self, acc_no):
+        if acc_no in self.accounts:
+            print(f"Account: {acc_no}, Name: {self.accounts[acc_no]['name']}, Balance: {self.accounts[acc_no]['balance']}")
+        else:
+            print("Account not found!")
 
-account1 = BankAccount("12345", 1000.00)
-account1.display_account()
+def bank_menu():
+    bank = Bank()
+    while True:
+        print("\n1. Create Account")
+        print("2. Deposit")
+        print("3. Withdraw")
+        print("4. Display Account")
+        print("5. Exit")
 
-account1.deposit(500.00)
-account1.withdraw(200.00)
-account1.withdraw(1500.00)  # Insufficient funds
-account1.deposit(-100) #negative deposit.
-account1.withdraw(-100) #negative withdraw.
+        choice = input("Enter your choice: ")
 
-account1.display_account()
+        if choice == '1':
+            acc_no = input("Enter Account Number: ")
+            name = input("Enter Name: ")
+            balance = float(input("Enter Initial Balance: "))
+            bank.create_account(acc_no, name, balance)
+        elif choice == '2':
+            acc_no = input("Enter Account Number: ")
+            amount = float(input("Enter Amount to Deposit: "))
+            bank.deposit(acc_no, amount)
+        elif choice == '3':
+            acc_no = input("Enter Account Number: ")
+            amount = float(input("Enter Amount to Withdraw: "))
+            bank.withdraw(acc_no, amount)
+        elif choice == '4':
+            acc_no = input("Enter Account Number: ")
+            bank.display_account(acc_no)
+        elif choice == '5':
+            break
+        else:
+            print("Invalid choice! Try again.")
 
-account2 = BankAccount("67890") #create account with 0 balance
-account2.display_account()
+bank_menu()
