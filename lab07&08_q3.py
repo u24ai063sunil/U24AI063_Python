@@ -1,96 +1,69 @@
+"""
+Write a Python program to create a class representing a bank. Include methods for managing
+customer accounts and transactions.
+"""
+
 class Bank:
-    def __init__(self, bank_name):
-        self.bank_name = bank_name
-        self.accounts = {}  # Dictionary to store accounts (account_number: account_details)
+    def __init__(self):
+        self.accounts = {}
 
-    def create_account(self, account_number, customer_name, initial_balance=0):
-        if account_number in self.accounts:
-            print(f"Account number {account_number} already exists.")
-            return False
+    def create_account(self, acc_no, name, balance=0):
+        if acc_no in self.accounts:
+            print("Account already exists!")
+        else:
+            self.accounts[acc_no] = {'name': name, 'balance': balance}
+            print("Account created successfully.")
 
-        self.accounts[account_number] = {
-            "customer_name": customer_name,
-            "balance": initial_balance,
-            "transactions": []  # List to store transaction history
-        }
-        print(f"Account {account_number} created successfully for {customer_name}.")
-        return True
+    def deposit(self, acc_no, amount):
+        if acc_no in self.accounts:
+            self.accounts[acc_no]['balance'] += amount
+            print(f"Deposited {amount}. New balance: {self.accounts[acc_no]['balance']}")
+        else:
+            print("Account not found!")
 
-    def deposit(self, account_number, amount):
-        if account_number not in self.accounts:
-            print(f"Account number {account_number} not found.")
-            return False
+    def withdraw(self, acc_no, amount):
+        if acc_no in self.accounts and self.accounts[acc_no]['balance'] >= amount:
+            self.accounts[acc_no]['balance'] -= amount
+            print(f"Withdrew {amount}. New balance: {self.accounts[acc_no]['balance']}")
+        else:
+            print("Insufficient funds or account not found!")
 
-        if amount <= 0:
-            print("Deposit amount must be greater than zero.")
-            return False
+    def display_account(self, acc_no):
+        if acc_no in self.accounts:
+            print(f"Account: {acc_no}, Name: {self.accounts[acc_no]['name']}, Balance: {self.accounts[acc_no]['balance']}")
+        else:
+            print("Account not found!")
 
-        self.accounts[account_number]["balance"] += amount
-        self.accounts[account_number]["transactions"].append(f"Deposit: +{amount}")
-        print(f"Deposited {amount} into account {account_number}.")
-        return True
+def bank_menu():
+    bank = Bank()
+    while True:
+        print("\n1. Create Account")
+        print("2. Deposit")
+        print("3. Withdraw")
+        print("4. Display Account")
+        print("5. Exit")
 
-    def withdraw(self, account_number, amount):
-        if account_number not in self.accounts:
-            print(f"Account number {account_number} not found.")
-            return False
+        choice = input("Enter your choice: ")
 
-        if amount <= 0:
-            print("Withdrawal amount must be greater than zero.")
-            return False
+        if choice == '1':
+            acc_no = input("Enter Account Number: ")
+            name = input("Enter Name: ")
+            balance = float(input("Enter Initial Balance: "))
+            bank.create_account(acc_no, name, balance)
+        elif choice == '2':
+            acc_no = input("Enter Account Number: ")
+            amount = float(input("Enter Amount to Deposit: "))
+            bank.deposit(acc_no, amount)
+        elif choice == '3':
+            acc_no = input("Enter Account Number: ")
+            amount = float(input("Enter Amount to Withdraw: "))
+            bank.withdraw(acc_no, amount)
+        elif choice == '4':
+            acc_no = input("Enter Account Number: ")
+            bank.display_account(acc_no)
+        elif choice == '5':
+            break
+        else:
+            print("Invalid choice! Try again.")
 
-        if self.accounts[account_number]["balance"] < amount:
-            print("Insufficient funds.")
-            return False
-
-        self.accounts[account_number]["balance"] -= amount
-        self.accounts[account_number]["transactions"].append(f"Withdrawal: -{amount}")
-        print(f"Withdrawn {amount} from account {account_number}.")
-        return True
-
-    def get_balance(self, account_number):
-        if account_number not in self.accounts:
-            print(f"Account number {account_number} not found.")
-            return None
-
-        return self.accounts[account_number]["balance"]
-
-    def get_transaction_history(self, account_number):
-      if account_number not in self.accounts:
-            print(f"Account number {account_number} not found.")
-            return None
-
-      return self.accounts[account_number]["transactions"]
-
-    def display_account_details(self, account_number):
-        if account_number not in self.accounts:
-            print(f"Account number {account_number} not found.")
-            return
-
-        account = self.accounts[account_number]
-        print(f"Account Number: {account_number}")
-        print(f"Customer Name: {account['customer_name']}")
-        print(f"Balance: {account['balance']}")
-        print("Transaction History:")
-        for transaction in account["transactions"]:
-            print(f"  {transaction}")
-        print("-" * 20)
-
-
-my_bank = Bank("SBI")
-
-my_bank.create_account(394327, "Sunil", 1000)
-my_bank.create_account(543218, "Vikram")
-my_bank.deposit(394327, 500)
-my_bank.withdraw(394327, 200)
-my_bank.deposit(543218, 100)
-my_bank.withdraw(543218, 50)
-
-my_bank.display_account_details(394327)
-my_bank.display_account_details(543218)
-
-print(f"Sunil's balance: {my_bank.get_balance(394327)}")
-print(f"Vikram's transaction history: {my_bank.get_transaction_history(543218)}")
-
-my_bank.create_account(394327, "Charlie") #attempt to create duplicate account.
-my_bank.withdraw(99999, 100) #attempt to withdraw from nonexistant account.
+bank_menu()
