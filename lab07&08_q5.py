@@ -1,3 +1,11 @@
+"""
+Create a base class "Shape" with methods to calculate the area and perimeter. Implement
+derived classes "Rectangle" and "Circle" that inherit from "Shape" and provide their own area
+and perimeter calculations.
+"""
+
+import math
+
 class Shape:
     def area(self):
         pass
@@ -6,39 +14,46 @@ class Shape:
         pass
 
 class Rectangle(Shape):
-    def __init__(self, width, height):
+    def __init__(self, length, width):
+        self.length = length
         self.width = width
-        self.height = height
 
     def area(self):
-        return self.width * self.height
+        return self.length * self.width
 
     def perimeter(self):
-        return 2 * (self.width + self.height)
+        return 2 * (self.length + self.width)
 
 class Circle(Shape):
     def __init__(self, radius):
         self.radius = radius
 
     def area(self):
-        return 3.14 * self.radius ** 2
+        return math.pi * self.radius ** 2
 
     def perimeter(self):
-        return 2 * 3.14 * self.radius
+        return 2 * math.pi * self.radius
 
+def shape_menu():
+    print("\n1. Rectangle")
+    print("2. Circle")
+    
+    choice = input("Choose Shape: ")
 
-rectangle = Rectangle(5, 3)
-circle = Circle(2)
+    if choice == '1':
+        length = float(input("Enter length: "))
+        width = float(input("Enter width: "))
+        rect = Rectangle(length, width)
+        print("Area:", rect.area())
+        print("Perimeter:", rect.perimeter())
 
-print("Rectangle:")
-print(f"Area: {rectangle.area()}")
-print(f"Perimeter: {rectangle.perimeter()}")
+    elif choice == '2':
+        radius = float(input("Enter radius: "))
+        circ = Circle(radius)
+        print("Area:", circ.area())
+        print("Perimeter:", circ.perimeter())
 
-print("\nCircle:")
-print(f"Area: {circle.area()}")
-print(f"Perimeter: {circle.perimeter()}")
+    else:
+        print("Invalid choice!")
 
-
-print("\nDemonstrating inheritance")
-print(f"Is Rectangle a Shape? {isinstance(rectangle, Shape)}")
-print(f"Is Circle a Shape? {isinstance(circle, Shape)}")
+shape_menu()
