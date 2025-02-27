@@ -13,11 +13,6 @@ class Queue:
             return "Queue is empty"
         return self.items.pop(0)
 
-    def peek(self):
-        if self.is_empty():
-            return "Queue is empty"
-        return self.items
-
     def size(self):
         return len(self.items)
 
@@ -37,7 +32,6 @@ queue.enqueue(3)
 queue.display()
 
 print("Dequeued:", queue.dequeue()) 
-print("Peek:", queue.peek()) 
 
 queue.display() # Output: Queue:
 
