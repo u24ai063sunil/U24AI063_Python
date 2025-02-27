@@ -1,3 +1,10 @@
+"""
+Create a class for representing any 2-D point or vector. The methods inside this class include
+its magnitude and its rotation with respect to the X-axis. Using the objects define functions for
+calculating the distance between two vectors, dot product, cross product of two vectors. Extend
+the 2-D vectors into 3-D using the concept of inheritance. Update the methods according to 3-
+D.
+"""
 import math
 
 class Vector2D:
@@ -8,25 +15,37 @@ class Vector2D:
     def magnitude(self):
         return math.sqrt(self.x**2 + self.y**2)
 
-    def rotation(self):
+    def angle_with_x_axis(self):
         return math.degrees(math.atan2(self.y, self.x))
-
+    
+    def __sub__(self, other):
+        return Vector2D(self.x - other.x, self.y - other.y)
+    
+    def distance(self, other):
+        diff = self - other
+        return diff.magnitude()
+    
+    def dot_product(self, other):
+        return self.x * other.x + self.y * other.y
+    
+    def cross_product(self, other):
+        return self.x * other.y - self.y * other.x
+    
     def __str__(self):
         return f"({self.x}, {self.y})"
+
+    def distance_to(self, other):
+        return math.sqrt((other.x - self.x)**2 + (other.y - self.y)**2)
+
+    def dot(self, other):
+        return self.x * other.x + self.y * other.y
+
+    def cross(self, other):
+        return self.x * other.y - self.y * other.x
 
     def __repr__(self):
         return f"Vector2D({self.x}, {self.y})"
 
-def distance_2d(v1, v2):
-    return math.sqrt((v2.x - v1.x)**2 + (v2.y - v1.y)**2)
-
-def dot_product_2d(v1, v2):
-    return v1.x * v2.x + v1.y * v2.y
-
-def cross_product_2d(v1, v2):
-    return v1.x * v2.y - v1.y * v2.x
-
-# 3D Vector using inheritance
 
 class Vector3D(Vector2D):
     def __init__(self, x, y, z):
@@ -35,38 +54,30 @@ class Vector3D(Vector2D):
 
     def magnitude(self):
         return math.sqrt(self.x**2 + self.y**2 + self.z**2)
-
+    
+    def __sub__(self, other):
+        return Vector3D(self.x - other.x, self.y - other.y, self.z - other.z)
+    
+    def distance(self, other):
+        diff = self - other
+        return diff.magnitude()
+    
+    def dot_product(self, other):
+        return self.x * other.x + self.y * other.y + self.z * other.z
+    
+    def cross_product(self, other):
+        return Vector3D(
+            self.y * other.z - self.z * other.y,
+            self.z * other.x - self.x * other.z,
+            self.x * other.y - self.y * other.x
+        )
+    
     def __str__(self):
         return f"({self.x}, {self.y}, {self.z})"
 
-    def __repr__(self):
-        return f"Vector3D({self.x}, {self.y}, {self.z})"
+def vector_menu():
+    x, y, z = map(float, input("Enter x, y, z: ").split())
+    vec = Vector3D(x, y, z)
+    print("Magnitude:", vec.magnitude())
 
-def distance_3d(v1, v2):
-    return math.sqrt((v2.x - v1.x)**2 + (v2.y - v1.y)**2 + (v2.z - v1.z)**2)
-
-def dot_product_3d(v1, v2):
-    return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z
-
-def cross_product_3d(v1, v2):
-    return Vector3D(v1.y * v2.z - v1.z * v2.y,
-                    v1.z * v2.x - v1.x * v2.z,
-                    v1.x * v2.y - v1.y * v2.x)
-
-
-v1_2d = Vector2D(3, 4)
-v2_2d = Vector2D(1, 2)
-
-print(f"Magnitude of v1 (2D): {v1_2d.magnitude()}")
-print(f"Rotation of v1 (2D): {v1_2d.rotation()}")
-print(f"Distance between v1 and v2 (2D): {distance_2d(v1_2d, v2_2d)}")
-print(f"Dot product of v1 and v2 (2D): {dot_product_2d(v1_2d, v2_2d)}")
-print(f"Cross product of v1 and v2 (2D): {cross_product_2d(v1_2d, v2_2d)}")
-
-v1_3d = Vector3D(1, 2, 3)
-v2_3d = Vector3D(4, 5, 6)
-
-print(f"\nMagnitude of v1 (3D): {v1_3d.magnitude()}")
-print(f"Distance between v1 and v2 (3D): {distance_3d(v1_3d, v2_3d)}")
-print(f"Dot product of v1 and v2 (3D): {dot_product_3d(v1_3d, v2_3d)}")
-print(f"Cross product of v1 and v2 (3D): {cross_product_3d(v1_3d, v2_3d)}")
+vector_menu()
