@@ -1,0 +1,103 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f8f8f8;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    color: white;
+    position: absolute;
+    width: 100%;
+}
+
+.logo {
+    font-size: 8rem;
+    font-weight: bold;
+}
+
+header{
+    display:flex;
+    justify-content: right;
+}
+
+.buttons button {
+    background-color: white;
+    border: none;
+    border-radius: 10%;
+    color:red;
+    padding: 10px 15px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.buttons button:hover{
+    transform:scale(1.05);
+}
+
+.hero {
+    text-align: center;
+    background: url('https://b.zmtcdn.com/web_assets/81f3ff974d82520780078ba1cfbd453a1583259680.png') no-repeat center center/cover;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    padding: 20px;
+}
+
+.search-bar {
+    margin-top: 20px;
+}
+
+.search-bar input {
+    width: 60%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+.search-bar button {
+    padding: 10px 15px;
+    border: none;
+    background-color: #ff4d4d;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.categories {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.category {
+    text-align: center;
+    border-top: 0;
+    border-radius: 5px;
+}
+
+.category img {
+    width: 200px;
+    height: 150px;
+    border-radius: 10px;
+}
+
+.category img:hover{
+    transform:scale(1.03);
+}
+
+.category p {
+    margin-top: 10px;
+    font-weight: bold;
+}
