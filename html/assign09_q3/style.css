@@ -1,0 +1,132 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #A0E7E5;
+}
+
+header {
+    background: #fff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color:#B4F8C8 ;
+}
+nav{
+    display:flex;
+    justify-content:space-around ;
+}
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    margin-right:80px;
+}
+
+.nav-links li {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.auth-buttons {
+    display: flex;
+    justify-content: right;
+    gap: 10px;
+    margin-left:80px;
+}
+.sign-up:hover{
+    transform:scale(1.05);
+}
+.sign-up:hover{
+    transform:scale(1.05);
+}
+.sign-in, .sign-up {
+    padding: 5px 10px;
+    border: none;
+    border-radius:10%;
+    cursor: pointer;
+}
+
+.sign-in {
+    background: #007bff;
+    color: white;
+}
+
+.product:hover{
+    transform: scale(1.05);
+}
+
+.sign-up {
+    background: #f8f9fa;
+    border: 1px solid #007bff;
+    color: #007bff;
+}
+
+.banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f5f5f5;
+    padding: 40px;
+    background-color:#FFAEBC ;
+}
+
+.banner-text h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.banner-text p {
+    font-size: 18px;
+}
+
+.shop-now {
+    display: inline-block;
+    margin-top: 10px;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.banner-image {
+    width: 1000px;
+
+}
+
+.trending {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.trending h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.product-grid {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.product {
+    background: white;
+    background-color:#FBE7C6 ;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5%;
+    text-align: center;
+    width: 150px;
+}
+
+.product img {
+    width: 100%;
+    height: auto;
+}
+
+.product p {
+    margin: 5px 0;
+}
